@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --preto: #000;
+    --branco: #fff;
+    --azulescuro:rgb(4, 8, 29);
+    --amarelo: #f0e935;
+    --cinza: #ccc;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--branco);
+    background-color: var(--azulescuro);
+    font-family: 'Poppins';
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-family: 'Oxanium';
+
+    img {
+        width: 70px;
+        height: auto;
+        padding: 0;
+    }
+
+    h1{
+        font-size: 40px;
+        padding: 20px 0;
+    }
+}
+
+#menu {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 56px;
+}
+
+nav a {
+    text-decoration: none;
+    padding: 6px 20px;
+    border-radius: 6px;
+    color: var(--cinza);
+    transition: all 0.5s ease-in-out;
+}
+
+nav a:hover {
+    color: var(--branco);
+}
+
+nav input {
+    padding: 6px 15px;
+    border-radius: 30px;
+    border: none;
+    font-family: 'Poppins';
+}
+
+nav button {
+    padding: 6px 20px;
+    border-radius: 30px;
+    background-color: var(--amarelo);
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+nav button:hover {
+    background-color: var(--cinza);
+}
