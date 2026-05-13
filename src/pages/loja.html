@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/estilo.css">
     <title>Loja</title>
 </head>
@@ -25,10 +26,32 @@
                 </div>
             </nav>
         </div>
+
+        <section id="carrinho">
+            <h2 class="secao-titulo">Carrinho de Compras</h2>
+ 
+            <div id="listar-produtos"></div>
+ 
+            <div id="resumo">
+                <div id="resultado-total"></div>
+ 
+                <div class="resumo-btns">
+                    <button onclick="calcularTotal()">
+                        <i class="bx bx-receipt"></i> Ver Total
+                    </button>
+                    <button onclick="aplicarDesconto()" id="btn-desconto">
+                        <i class="bx bx-credit-card-alt"></i> Aplicar 10% de Desconto
+                    </button>
+                </div>
+
+            </div>
+        </section>
     </main>
     
     <footer>
         <p>&copy; Estela Mariano e Gabriela Labrada 2026 - Todos os direitos reservados</p>
     </footer>
+
+    <script src="../js/script.js"></script>
 </body>
 </html>

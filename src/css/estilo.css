@@ -82,8 +82,33 @@ nav button:hover {
     background-color: var(--cinza);
 }
 
+.sobre {
+    flex-wrap: wrap;
+    padding: 40px;
+
+    p{
+        text-indent: 2em;
+        text-align: justify;
+    }
+
+    h2{
+        font-size: 30px;
+    }
+}
+
+p::selection, h1::selection, h2::selection {
+    background-color: var(--amarelo);
+    color: var(--azulescuro);
+}
+
 footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--amarelo);
+    color: var(--azulescuro);
+}
+
+b {
+    color: rgb(255, 255, 187);
 }
