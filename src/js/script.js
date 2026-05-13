@@ -22,7 +22,7 @@ const produtos = [
 
     {
         nome: "Chewbacca e Han Solo",
-        descricao: "Conjunto especial de Star Wars, Chewbacca e Han Solo juntos com base e fundo temático. \n Altura: 30cm",
+        descricao: "Conjunto especial de Star Wars, Chewbacca e Han Solo juntos com base e fundo temático.\n Altura: 30cm",
         preco: 1980,
         imagem:"./src/assets/img/action-figure-chewbacca.png"
     },
@@ -61,8 +61,8 @@ const container = document.getElementById("produtos");
 if (container) {
     const htmlProdutos = produtos.map(item => `
         <div class="card">
-            <img src="${item.imagem}" alt="${item.nome}" class="card-img">
             <div class="card-body">
+            <img src="${item.imagem}" alt="${item.nome}" class="card-img">
                 <h3 class="card-nome">${item.nome}</h3>
                 <p class="card-descricao">${item.descricao}</p>
                 <span class="card-preco">R$ ${item.preco.toFixed(2)}</span>
