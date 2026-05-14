@@ -36,10 +36,10 @@ const produtos = [
 ];
 
 // carrinho
-let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+let carrinho = JSON.parse(sessionStorage.getItem("carrinho")) || [];
  
 function salvarCarrinho() {
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+    sessionStorage.setItem("carrinho", JSON.stringify(carrinho));
 }
  
 function adicionarAoCarrinho(nome, preco) {
@@ -53,6 +53,25 @@ function adicionarAoCarrinho(nome, preco) {
  
     salvarCarrinho();
     alert(`"${nome}" adicionado ao carrinho!`);
+}
+
+function removerDoCarrinho(nome) {
+    const index = carrinho.findIndex(item => item.nome === nome);
+    if (index === -1) return;
+
+    if (carrinho[index].quantidade > 1){
+        carrinho[index].quantidade -=1;
+    } else {
+        carrinho.splice(index, 1);
+    }
+
+    salvarCarrinho();
+
+    document.getElementById("resultado-total").innerHTML = "";
+    const btnDesconto = document.getElementById("btn-desconto");
+    if (btnDesconto) btnDesconto.style.display = "none";
+
+    renderizarCarrinho();
 }
 
 // Index - map dos cards
@@ -78,30 +97,35 @@ if (container) {
 
 // Loja - map carrinho
 const containerCarrinho = document.getElementById("listar-produtos");
- 
-if (containerCarrinho) {
-    function renderizarCarrinho() {
-        if (carrinho.length === 0) {
-            containerCarrinho.innerHTML = `<p class="carrinho-vazio">Seu carrinho está vazio. <a href="../../index.html">Voltar à loja</a></p>`;
-            return;
-        }
- 
-        const htmlItens = carrinho.map(item => `
-            <div class="item-carrinho">
-                <div class="item-info">
-                    <h3>${item.nome}</h3>
-                    <p>Quantidade: ${item.quantidade}</p>
-                </div>
-                <span class="item-preco">R$ ${(item.preco * item.quantidade).toFixed(2)}</span>
-            </div>
-        `).join('');
- 
-        containerCarrinho.innerHTML = htmlItens;
+
+function renderizarCarrinho() {
+
+    if (!containerCarrinho) return;
+
+    if (carrinho.length === 0) {
+        containerCarrinho.innerHTML = `<p class="carrinho-vazio">Seu carrinho está vazio. <a href="../../index.html">Voltar à loja</a></p>`;
+        return;
     }
- 
-    renderizarCarrinho();
+
+    const htmlItens = carrinho.map(item => `
+        <div class="item-carrinho">
+            <div class="item-info">
+                <h3>${item.nome}</h3>
+                <p>Quantidade: ${item.quantidade}</p>
+            </div>
+            <div class="item-acoes">
+                <span class="item-preco">R$ ${(item.preco * item.quantidade).toFixed(2)}</span>
+                <button class="btn-remover" onclick="removerDoCarrinho('${item.nome}')"><i class="bx bx-trash"></i>Remover</button>
+            </div>
+        </div>
+    `).join('');
+
+    containerCarrinho.innerHTML = htmlItens;
 }
 
+if (containerCarrinho){
+    renderizarCarrinho();
+}
 // Loja - Reduce
 function calcularTotal() {
     const total = carrinho.reduce((acumulador, item) => {
@@ -114,7 +138,6 @@ function calcularTotal() {
 }
 
 // Loja - desconto
-
 function aplicarDesconto() {
     const total = carrinho.reduce((acumulador, item) => {
         return acumulador + (item.preco * item.quantidade)
