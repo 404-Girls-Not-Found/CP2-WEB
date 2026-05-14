@@ -3,37 +3,41 @@ const produtos = [
         nome: "Mulher Maravilha",
         descricao: "Action figure da heroína Mulher Maravilha com traje original com escudo e lança.\n Altura: 30cm",
         preco: 650,
-        imagem: "./src/assets/img/action-figure-wonder-woman.jpg"   
+        imagem: "action-figure-wonder-woman.jpg"   
     },
 
     {
         nome: "Bela e a Fera",
         descricao: "Conjunto especial Studios Disney 100 anos com a Bela e a Fera em edição colecionável.\n Altura: 35cm",
         preco: 2220.90,
-        imagem: "./src/assets/img/action-figure-bela-fera.jpg"
+        imagem: "action-figure-bela-fera.jpg"
     },
 
     {
         nome: "Pequena Sereia",
         descricao: "Ariel em base temática com Linguado, Sebastião e outros elementos do filme.\n Altura: 25cm",
         preco: 1560,
-        imagem: "./src/assets/img/action-figure-pequena-sereia.png"
+        imagem: "action-figure-pequena-sereia.png"
     },
 
     {
         nome: "Chewbacca e Han Solo",
         descricao: "Conjunto especial de Star Wars, Chewbacca e Han Solo juntos com base e fundo temático.\n Altura: 30cm",
         preco: 1980,
-        imagem:"./src/assets/img/action-figure-chewbacca.png"
+        imagem:"action-figure-chewbacca.png"
     },
 
     {
         nome: "Aladdin e Jasmine",
         descricao: "Alladin e Jasmine no tapete mágico com base do Palácio do Sultão.\n Altura: 40cm",
         preco: 980.90,
-        imagem: "./src/assets/img/action-figure-alladin.png"
+        imagem: "action-figure-alladin.png"
     }
 ];
+
+const prefixoImagem = document.getElementById("produtos")
+    ? "./src/assets/img/"
+    : "../assets/img/";
 
 // carrinho
 let carrinho = JSON.parse(sessionStorage.getItem("carrinho")) || [];
@@ -48,7 +52,8 @@ function adicionarAoCarrinho(nome, preco) {
     if (itemExistente) {
         itemExistente.quantidade += 1;
     } else {
-        carrinho.push({ nome: nome, preco: preco, quantidade: 1 });
+        const produto = produtos.find(p =>p.nome === nome);
+        carrinho.push({ nome: nome, preco: preco, quantidade: 1, imagem: produto.imagem });
     }
  
     salvarCarrinho();
@@ -81,7 +86,7 @@ if (container) {
     const htmlProdutos = produtos.map(item => `
         <div class="card">
             <div class="card-body">
-            <img src="${item.imagem}" alt="${item.nome}" class="card-img">
+            <img src="${prefixoImagem}${item.imagem}" alt="${item.nome}" class="card-img">
                 <h3 class="card-nome">${item.nome}</h3>
                 <p class="card-descricao">${item.descricao}</p>
                 <span class="card-preco">R$ ${item.preco.toFixed(2)}</span>
@@ -110,8 +115,11 @@ function renderizarCarrinho() {
     const htmlItens = carrinho.map(item => `
         <div class="item-carrinho">
             <div class="item-info">
-                <h3>${item.nome}</h3>
-                <p>Quantidade: ${item.quantidade}</p>
+                <img src="${prefixoImagem}${item.imagem}" alt="${item.nome}" class="item-img">
+                <div class="item-texto">
+                    <h3>${item.nome}</h3>
+                    <p>Quantidade: ${item.quantidade}</p>
+                </div>
             </div>
             <div class="item-acoes">
                 <span class="item-preco">R$ ${(item.preco * item.quantidade).toFixed(2)}</span>
@@ -126,6 +134,7 @@ function renderizarCarrinho() {
 if (containerCarrinho){
     renderizarCarrinho();
 }
+
 // Loja - Reduce
 function calcularTotal() {
     const total = carrinho.reduce((acumulador, item) => {
