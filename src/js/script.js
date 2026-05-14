@@ -108,7 +108,7 @@ function renderizarCarrinho() {
     if (!containerCarrinho) return;
 
     if (carrinho.length === 0) {
-        containerCarrinho.innerHTML = `<p class="carrinho-vazio">Seu carrinho está vazio. <a href="../../index.html">Voltar à loja</a></p>`;
+        containerCarrinho.innerHTML = `<p class="carrinho-vazio">Seu carrinho está vazio. <a href="../../index.html">Voltar ao Início</a></p>`;
         return;
     }
 
